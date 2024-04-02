@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    
+*@
+@{
+    ViewData["Title"] = "My Work Page";
+    @model List<KhumaloCraft.Models.ArtisanWork>
+}
+
+<main>
+    <section>
+        <div class="search-div"><input class="search-bar" type="text" placeholder="search"> <button class="search-button">Search</button> </div>
+    
+
+        <div class="container">
+            <div class="row">
+                @{
+                    int productsPerRow = 3;
+                    int counter = 0;
+                }
+
+                @foreach (var work in Model)
+                {
+                    <div class="col-md" style="padding-bottom: 40px;">
+                        <div class="card">
+                            <div class="card-img-container">
+                                <img src="@work.ImgSource" class="card-img" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@work.ArtisanName @work.ArtisanSurname</h5>
+                                <p class="card-text">@work.Desciption</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button class="add-to-cart">R @work.Price</button>
+                                    <div class="rating">
+                                        <span class="badge badge-primary">@work.Rating</span> 
+                                        <i class="fas fa-star"></i> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (++counter % productsPerRow == 0)
+                    {
+                        @:</div> <!-- .row -->
+                        @:<div class="row">
+                    }
+                }
+            </div> <!-- .row -->
+        </div> <!-- .container -->
+    </section>
+</main>
